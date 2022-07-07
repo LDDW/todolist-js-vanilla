@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list js vanilla</title>
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header id="header">
+        <div class="date">
+            <span class="number"></span>
+            <div>
+                <span class="day"></span>
+                <span>
+                    <span class="month"></span><span class="year"></span>
+                </span>
+            </div>
+        </div>
+        <button id="show-modal"><i class='bx bx-plus'></i></button>
+    </header>
+
+    <!-- MODAL -->
+
+    <div class="bg_modal hide">
+        <div class="modal_add_todo">
+            <div class="header_modal">
+                <p>Ajouter une nouvelle tâche</p>
+                <button id="hide-modal"><i class='bx bx-x'></i></button>
+            </div>
+            <div class="content_modal">
+                <input type="text" name="" id="input-add-todo">
+                <button id="add-todo">Créer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN -->
+
+    <main>
+
+        <div class="todolist">
+            <ul class="list">
+                <li>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. odit tempora voluptate incidunt natus illo pariatur sunt ipsam suscipit, excepturi, dolorum a corrupti blanditiis error quas amet expedita deleniti.</p>
+                    <button class="completed_task"><i class='bx bx-check-circle'></i></button>
+                    <!-- <i class='bx bxs-check-circle' ></i> -->
+                </li>
+            </ul>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <a href="" class="github_link">
+            <i class='bx bxl-github'></i>
+        </a>
+        <p>&copy; Copyright 2022</p>
+    </footer>
+
+    <script src="assets/js/date.js"></script>
+    <script src="assets/js/todos.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

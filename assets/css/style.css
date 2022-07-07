@@ -1,0 +1,200 @@
+@charset "UTF-8";
+/* ==================== Imports ==================== */
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap");
+/* ============= MIXINS ============= */
+/* ============= PLACEHOLDERS ============= */
+footer, .bg_modal .modal_add_todo .header_modal,
+.bg_modal .modal_add_todo .content_modal, .bg_modal .modal_add_todo, .todolist .list li, #header .date div span, #header .date, #header, button {
+  display: flex;
+  align-items: center;
+}
+
+/* ============= VARIABLES ============= */
+/* ===== FONTS ===== */
+/* ===== FONT-SIZE ===== */
+/* ===== HEADER-HEIGHT ===== */
+/* ===== PADDING ===== */
+/* ===== MARGIN ===== */
+/* ===== COLOR ===== */
+/* ===== TRANSITION ===== */
+/* ==================== Général ==================== */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Karla", sans-serif;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* ==================== Main ==================== */
+main {
+  min-height: calc(100vh - 80px);
+}
+
+/* ==================== Header ==================== */
+#header {
+  width: 100%;
+  height: 80px;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+#header .date span {
+  display: block;
+}
+#header .date .number {
+  font-size: 50px;
+  margin-right: 10px;
+}
+#header .date div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80px;
+  line-height: 20px;
+}
+#header .date div span .month {
+  margin-right: 5px;
+}
+#header button {
+  padding: 10px;
+  background: #2196F3;
+  color: #FFFFFF;
+  border-radius: 50%;
+}
+
+/* ==================== Todolist ==================== */
+.todolist {
+  padding: 20px;
+  overflow: scroll;
+}
+.todolist .list li {
+  height: 60px;
+  justify-content: space-between;
+  list-style: none;
+  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 15px;
+  background: #F1F1F1;
+}
+.todolist .list li p {
+  width: calc(100% - 30px);
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.todolist .list li button {
+  font-size: 20px;
+}
+
+/* ==================== Modal add todo ==================== */
+.bg_modal {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+  transition: all 0.1s ease-in-out;
+}
+.bg_modal .modal_add_todo {
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  height: 18vh;
+  background: #212121;
+  transition: all 0.2s ease-in-out;
+  border-radius: 25px 25px 0 0;
+}
+.bg_modal .modal_add_todo .header_modal,
+.bg_modal .modal_add_todo .content_modal {
+  width: 100%;
+  padding: 20px;
+}
+.bg_modal .modal_add_todo .header_modal {
+  height: 8vh;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+.bg_modal .modal_add_todo .header_modal p {
+  color: #FFFFFF;
+}
+.bg_modal .modal_add_todo .header_modal button {
+  background: transparent;
+  color: #FFFFFF;
+  font-size: 20px;
+}
+.bg_modal .modal_add_todo .content_modal {
+  height: 10vh;
+  padding-top: 10px;
+}
+.bg_modal .modal_add_todo .content_modal input {
+  padding: 0 10px;
+  width: calc(100% - 100px);
+  height: 40px;
+  border: 0;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+.bg_modal .modal_add_todo .content_modal button {
+  width: 100px;
+  height: 40px;
+  display: block;
+  text-align: center;
+  border-radius: 0 5px 5px 0;
+  background: #2196F3;
+  color: #FFFFFF;
+}
+.bg_modal.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+.bg_modal.hide .modal_add_todo {
+  bottom: -30vh;
+}
+.bg_modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+.bg_modal.show .modal_add_todo {
+  bottom: 0;
+}
+
+/* ==================== Footer ==================== */
+footer {
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 140px;
+  background: #212121;
+}
+footer .github_link {
+  color: #FFFFFF;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+footer p {
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+/*# sourceMappingURL=style.css.map */

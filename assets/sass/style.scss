@@ -1,0 +1,211 @@
+/* ==================== Imports ==================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+@import '_settings.scss';
+
+/* ==================== Général ==================== */
+
+*,
+ ::before,
+ ::after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    user-select: none;
+}
+
+body {
+    font-size: 16px;
+    font-family: 'Karla', sans-serif;
+}
+
+button {
+    @extend %flex;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+
+/* ==================== Main ==================== */
+
+main {
+    min-height: calc(100vh - 80px);
+}
+
+
+/* ==================== Header ==================== */
+
+#header {
+    width: 100%;
+    height: 80px;
+    padding: 0 20px;
+    @extend %flex;
+    justify-content: space-between;
+    .date {
+        @extend %flex;
+        span {
+            display: block;
+        }
+        .number {
+            font-size: 50px;
+            margin-right: 10px;
+        }
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 80px;
+            line-height: 20px;
+            .day {}
+            span {
+                @extend %flex;
+                .month {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    button {
+        padding: 10px;
+        background: #2196F3;
+        color: #FFFFFF;
+        border-radius: 50%;
+    }
+}
+
+
+/* ==================== Todolist ==================== */
+
+.todolist {
+    padding: 20px;
+    overflow: scroll;
+    .list {
+        li {
+            @extend %flex;
+            height: 60px;
+            justify-content: space-between;
+            list-style: none;
+            margin-bottom: 10px;
+            padding: 20px;
+            border-radius: 15px;
+            background: #F1F1F1;
+            p {
+                width: calc(100% - 30px);
+                height: 20px;
+                line-height: 20px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            button {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+
+/* ==================== Modal add todo ==================== */
+
+.bg_modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(5px);
+    transition: all 0.1s ease-in-out;
+    .modal_add_todo {
+        z-index: 1;
+        position: fixed;
+        left: 0;
+        @extend %flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 100%;
+        height: 18vh;
+        background: #212121;
+        transition: all 0.2s ease-in-out;
+        border-radius: 25px 25px 0 0;
+        .header_modal,
+        .content_modal {
+            @extend %flex;
+            width: 100%;
+            padding: 20px;
+        }
+        .header_modal {
+            height: 8vh;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            p {
+                color: #FFFFFF;
+            }
+            button {
+                background: transparent;
+                color: #FFFFFF;
+                font-size: 20px;
+            }
+        }
+        .content_modal {
+            height: 10vh;
+            padding-top: 10px;
+            input {
+                padding: 0 10px;
+                width: calc(100% - 100px);
+                height: 40px;
+                border: 0;
+                border-radius: 5px 0 0 5px;
+                outline: none;
+            }
+            button {
+                width: 100px;
+                height: 40px;
+                display: block;
+                text-align: center;
+                border-radius: 0 5px 5px 0;
+                background: #2196F3;
+                color: #FFFFFF;
+            }
+        }
+    }
+    // hide en show style
+    &.hide {
+        visibility: hidden;
+        opacity: 0;
+        .modal_add_todo {
+            bottom: -30vh;
+        }
+    }
+    &.show {
+        visibility: visible;
+        opacity: 1;
+        .modal_add_todo {
+            bottom: 0;
+        }
+    }
+}
+
+
+/* ==================== Footer ==================== */
+
+footer {
+    @extend %flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 140px;
+    background: #212121;
+    .github_link {
+        color: #FFFFFF;
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+    p {
+        color: #FFFFFF;
+        text-transform: uppercase;
+    }
+}
