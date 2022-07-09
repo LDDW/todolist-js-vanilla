@@ -3,14 +3,16 @@ const todo = new todos();
 const btnShowModal = document.getElementById('show-modal');
 const btnHideModal = document.getElementById('hide-modal');
 const btnAddTodo = document.getElementById('add-todo');
-const btnsRemoveTodo = document.querySelectorAll('.remove_todo');
-const btnsCompletedTodo = document.querySelectorAll('.completed_task');
-const list = document.querySelectorAll('li');
+const list = document.querySelector('.list');
 const modal = document.querySelector('.modal_add_todo');
 const bgModal = document.querySelector('.bg_modal');
-const inputAddTodo = document.querySelector('#input-add-todo');
+const inputAddTodo = document.getElementById('input-add-todo');
 
-//toggle todo
+/**
+ * 
+ * ================================== MODAL ==================================
+ * 
+ */
 
 function toggleTodo() {
     if (bgModal.classList.contains('hide')) {
@@ -23,6 +25,8 @@ function toggleTodo() {
 // show modal new todo
 btnShowModal.addEventListener('click', function() {
     toggleTodo();
+    inputAddTodo.focus();
+    console.log();
 });
 
 // hide modal new todo
@@ -46,23 +50,6 @@ bgModal.addEventListener('click', function(e) {
     }
 });
 
-function addTodo() {
-    // create todo into todo object
-    todo.createTodo(inputAddTodo.value);
-
-    // add todo into html list
-
-    // reset value of input
-    inputAddTodo.value = '';
-
-    // hide modal
-    toggleTodo();
-
-    // show todo object into console
-    todo.getTodo();
-
-}
-
 btnAddTodo.addEventListener('click', function() {
     if (inputAddTodo.value !== '') {
         addTodo();
@@ -75,38 +62,110 @@ inputAddTodo.addEventListener('keyup', function(e) {
     }
 });
 
-// remove todo
-btnsRemoveTodo.forEach((btn, index) => {
-    btn.addEventListener('click', function() {
 
-        // remove todo into array
-        todo.removeTodo(list[index].firstElementChild.textContent)
+/**
+ * 
+ * ================================== CREATE TODO ==================================
+ * 
+ */
 
-        // remove HTML element
+function createHtmlTodo(title, completed) {
+    const html = `
+        <li>
+            <label class="task_list_item ${completed ? "completed" : ""}">
+                <input type="checkbox" class="task_input"/>
+                <span class="task_title">${title}</span>
+            </label>
+            <button class="remove_todo"><i class='bx bx-trash'></i></button>
+        </li>
+    `;
+    list.innerHTML += html;
+}
 
-        // show alert to confirm remove todo
+function addTodo() {
+    // create todo into todo object
+    todo.createTodo(inputAddTodo.value);
+    createHtmlTodo(inputAddTodo.value);
 
+    localStorage.setItem('todo', JSON.stringify(todo));
+
+    // reset value of input
+    inputAddTodo.value = '';
+
+    // hide modal
+    toggleTodo();
+
+    // refresh functions
+    deleteTodo();
+    checkTodo();
+}
+
+/**
+ * 
+ * ================================== CHECKED TODO ==================================
+ * 
+ */
+
+function checkTodo() {
+    const checkedElements = ['.task_input', '.task_title'];
+
+    for (let i = 0; i < checkedElements.length; i++) {
+        document.querySelectorAll(checkedElements[i]).forEach(element => {
+            element.addEventListener('click', function() {
+
+                const title = element.parentElement.querySelector('.task_title').innerText;
+                todo.checkTodo(title);
+                localStorage.setItem('todo', JSON.stringify(todo));
+
+                if (element.parentElement.classList.contains('completed')) {
+                    element.parentElement.classList.remove('completed');
+                } else {
+                    element.parentElement.classList.add('completed');
+                }
+
+            });
+        });
+        return true;
+    }
+}
+
+
+/**
+ * 
+ * ================================== DELETE TODO ==================================
+ * 
+ */
+
+function deleteTodo() {
+    const btnDeleteTodo = document.querySelectorAll('.remove_todo');
+
+    btnDeleteTodo.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const title = this.parentElement.querySelector('.task_title').innerText;
+            todo.removeTodo(title);
+            this.parentElement.remove();
+            localStorage.setItem('todo', JSON.stringify(todo));
+        });
     });
-});
+}
 
 
-// update todo
-btnsCompletedTodo.forEach((btn, index) => {
-    btn.addEventListener('click', function() {
+/**
+ * 
+ * ================================== TODO LOCAL STORAGE ==================================
+ * 
+ */
 
-        // update status of todo
-        todo.updateTodo(list[index].firstElementChild.textContent);
+if (localStorage.getItem('todo')) {
 
-        // remove btn completed todo
-        btn.remove();
+    for (let i = 0; i < JSON.parse(localStorage.getItem('todo')).todos.length; i++) {
+        todo.createTodo(JSON.parse(localStorage.getItem('todo')).todos[i].title, JSON.parse(localStorage.getItem('todo')).todos[i].completed);
+        createHtmlTodo(JSON.parse(localStorage.getItem('todo')).todos[i].title, JSON.parse(localStorage.getItem('todo')).todos[i].completed);
+    }
 
-        // create button 
-        const button = document.createElement('button');
-        button.innerHTML = '<i class=\'bx bx-trash\'></i>'
-        button.className = 'remove_todo';
+    todo.getTodo();
 
-        // append button into todo item
-        list[index].append(button);
-
-    });
-});
+    // delete todo function
+    deleteTodo();
+    checkTodo();
+}

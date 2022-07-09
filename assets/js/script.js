@@ -9,5 +9,3 @@ number.innerHTML = moment.utc().format('DD');
 day.innerHTML = moment.utc().format('dddd');
 month.innerHTML = moment.utc().format('MMMM');
 year.innerHTML = moment.utc().format('YYYY');
-
-// year.innerHTML = date.getFullYear()

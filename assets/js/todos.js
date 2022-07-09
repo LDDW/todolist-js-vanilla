@@ -8,17 +8,29 @@ class todos {
      * @name createTodo
      * @param {string} title
      */
-    createTodo(title) {
+    createTodo(title, completed) {
         this.todos.push({
-            title,
-            completed: false
+            title: title,
+            completed: completed == undefined ? false : completed
+        });
+    }
+
+    /**
+     * @name checkTodo
+     * @param {string} title
+     */
+    checkTodo(title) {
+        this.todos.forEach(todo => {
+            if (todo.title === title) {
+                console.log(this.todos)
+                todo.completed = !todo.completed;
+            }
         });
     }
 
     /**
      * @name removeTodo
      * @param {string} title
-     * @returns {boolean}
      */
     removeTodo(title) {
         this.todos.forEach((todo, index) => {
